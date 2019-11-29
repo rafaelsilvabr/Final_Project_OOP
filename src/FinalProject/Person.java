@@ -6,14 +6,13 @@ public class Person {
 	private String name;
 	private int year_birth;
 	private String institution;
-	private ArrayList<Article> articles;
+	ArrayList<Integer> articles;
 
-	public Person(String name, int year_birth, String institution, ArrayList<Article> articles) {
-		super();
+	public Person(String name, int year_birth, String institution,ArrayList<Integer> articles){
 		this.name = name;
 		this.year_birth = year_birth;
 		this.institution = institution;
-		this.articles = articles;
+		this.articles = articles;			
 	}
 
 	public String getName() {
@@ -40,11 +39,11 @@ public class Person {
 		this.institution = institution;
 	}
 
-	public ArrayList<Article> getArticles() {
+	public ArrayList<integer> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(Article article) {
+	public void setArticle(Article article) {
 		this.articles.add(article);
 	}
 	

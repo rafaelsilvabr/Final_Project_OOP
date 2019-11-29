@@ -22,6 +22,9 @@ public class Article {
 		this.publishing_year = publishing_year;
 		this.coments = coments;
 	}
+	public void setid(int id) {
+		this.id=id;
+	}
 	
 	public int getid() {
 		return id;
