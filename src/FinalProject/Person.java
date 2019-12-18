@@ -2,38 +2,24 @@ package FinalProject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.io.InputStream;
-//import java.io.InputStreamReader;
-//import java.io.OutputStream;
-//import java.io.OutputStreamWriter;
-//import java.io.BufferedReader;
-//import java.io.BufferedWriter;
 import java.io.*;
-//import java.io.FileInputStream;
-//import java.io.FileOutputStream;
 
-
-
-public class Person implements File_person {
+public class Person implements File {
 	private String name;
 	private int year_birth;
 	private String institution;
-	int qtd_articles;
-	String[] articles;
 	
-	private ArrayList<Person> authors=null;
+	public ArrayList<Person> authors=null;
 	
 	public Person() {
 		authors=new ArrayList<Person>();
 	}
 	
-	public Person(String name, int year_birth, String institution, int qtd_articles, String[] articles) {
+	public Person(String name, int year_birth, String institution) {
 		super();
 		this.name = name;
 		this.year_birth = year_birth;
 		this.institution = institution;
-		this.qtd_articles = qtd_articles;
-		this.articles = articles;
 	}
 
 	public String getName() {
@@ -59,22 +45,6 @@ public class Person implements File_person {
 	public void setInstitution(String institution) {
 		this.institution = institution;
 	}
-
-	public int getQtd_articles() {
-		return qtd_articles;
-	}
-
-	public void setQtd_articles(int qtd_articles) {
-		this.qtd_articles = qtd_articles;
-	}
-
-	public String[] getArticles() {
-		return articles;
-	}
-
-	public void setArticles(String[] articles) {
-		this.articles = articles;
-	}	
 	
 	public void readFile() throws IOException {
 		
@@ -92,7 +62,7 @@ public class Person implements File_person {
 		
 		
 		for(int i=0;i<qtd_person;i++) {
-			br.readLine();
+			s=br.readLine();
 			String name=s; //read name
 			
 			s=br.readLine(); //read year_birth and change String to int
@@ -106,18 +76,7 @@ public class Person implements File_person {
 			s=br.readLine(); //read institution
 			String institution=s;
 			
-			s=br.readLine(); //read qtd_articles
-			int qtd_articles=0;
-			c=1;
-			for(int i1=s.length()-1;i1>=0;i1--) {
-				qtd_articles+=((s.charAt(i1)-'0')*c);
-				c*=10;
-			}
-			
-			s=br.readLine(); //read articles
-			String[]articles=s.split(":");
-			
-			Person person=new Person (name,year_birth,institution,qtd_articles,articles);
+			Person person=new Person (name,year_birth,institution);
 			authors.add(person);
 		}
 		br.close();
@@ -135,15 +94,7 @@ public class Person implements File_person {
 			Person aux = authors.get(i);
 			bw.write(aux.getName()+ "\n");
 			bw.write(aux.getYear_birth()+ "\n");
-			bw.write(aux.getInstitution()+ "\n");
-			bw.write(aux.getQtd_articles()+ "\n");			
-			String str="";
-			int qtd_art=aux.getQtd_articles();
-			for(int i1=0;i1<qtd_art;i1++) {
-				str=str+aux.articles[i1];
-				if(i1<qtd_articles-1) str=str+":";
-			}
-			bw.write(str+ "\n");
+			bw.write(aux.getInstitution()+ "\n");			
 		}
 		bw.close();		
 	}
