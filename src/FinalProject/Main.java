@@ -13,10 +13,14 @@ public class Main {
 		Event event = new Event();		
 		event.readFile();
 		
+		Article article = new Article();
+		article.readFile(person, event);
 		
 		
+		article.writeFile();
 		event.writeFile();
 		person.writeFile();
+		
 	}
 
 }
