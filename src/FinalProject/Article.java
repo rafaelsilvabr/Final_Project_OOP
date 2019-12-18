@@ -217,5 +217,13 @@ public class Article implements File_Article {
 		}
 		bw.close();
 	}
+
+
+	public String toString() {
+		return "Article [id=" + id + ", author=" + author.getName() + ", title=" + title + ", keyWords=" + keyWords
+				+ ", publishingEvent=" + publishingEvent.getName() + ", publishing_year=" + publishing_year + ", coments="
+				+ coments + "]";
+	}
+	
 	
 }

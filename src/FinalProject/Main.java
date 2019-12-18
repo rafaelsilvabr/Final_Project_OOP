@@ -218,18 +218,61 @@ public class Main {
 								int type = Integer.parseInt(JOptionPane.showInputDialog("Informe o tipo : 0-Nacional | 1-Internacional"));
 								event.events.get(i).setType(type);
 							}
-						}
-						
+						}	
 					}
 				}
 				if(operation.equals("C")) {
-					
+					int busca = Integer.parseInt(JOptionPane.showInputDialog(null,"Informe o tipo de consulta: 1-keyword | 2-tipo de evento"));
+					if(busca==1) {
+						String str="";
+						String kw = JOptionPane.showInputDialog("Informe a KeyWord");
+						for(int i=0;i<article.articles.size();i++) {
+							for(int i2=0;i2<article.articles.get(i).keyWords.size();i2++) {
+								if(kw.equals(article.articles.get(i).keyWords.get(i2))) {
+									str += (article.articles.get(i)) + "\n";
+								}
+							}
+						}
+						JOptionPane.showMessageDialog(null,str);
+					}
+					if(busca==2) {
+						String str="";
+						int tipo_eve = Integer.parseInt(JOptionPane.showInputDialog(null,"Informe o tipo de evento: 1-Internacional | 0-Nacional"));
+						for(int i=0;i<article.articles.size();i++) {
+							if(tipo_eve == article.articles.get(i).getPublishingEvent().getType()) {
+								str += (article.articles.get(i)) + "\n";
+							}
+						}
+						JOptionPane.showMessageDialog(null,str);
+					}
 				}
 			}
 			
 		}
 		if(login_type.equals("User")){
-		
+				int busca = Integer.parseInt(JOptionPane.showInputDialog(null,"Busca de Artigos\nInforme o tipo de consulta: 1-keyword | 2-tipo de evento"));
+				if(busca==1) {
+					String str="";
+					String kw = JOptionPane.showInputDialog("Informe a KeyWord");
+					for(int i=0;i<article.articles.size();i++) {
+						for(int i2=0;i2<article.articles.get(i).keyWords.size();i2++) {
+							if(kw.equals(article.articles.get(i).keyWords.get(i2))) {
+								str += (article.articles.get(i)) + "\n";
+							}
+						}
+					}
+					JOptionPane.showMessageDialog(null,str);
+				}
+				if(busca==2) {
+					String str="";
+					int tipo_eve = Integer.parseInt(JOptionPane.showInputDialog(null,"Informe o tipo de evento: 1-Internacional | 0-Nacional"));
+					for(int i=0;i<article.articles.size();i++) {
+						if(tipo_eve == article.articles.get(i).getPublishingEvent().getType()) {
+							str += (article.articles.get(i)) + "\n";
+						}
+					}
+					JOptionPane.showMessageDialog(null,str);
+				}
 			
 		}
 		
