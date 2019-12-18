@@ -1,6 +1,7 @@
 package FinalProject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 //import java.io.InputStream;
 //import java.io.InputStreamReader;
 //import java.io.OutputStream;
@@ -19,6 +20,12 @@ public class Person implements File_person {
 	private String institution;
 	int qtd_articles;
 	String[] articles;
+	
+	private ArrayList<Person> authors=null;
+	
+	public Person() {
+		authors=new ArrayList<Person>();
+	}
 	
 	public Person(String name, int year_birth, String institution, int qtd_articles, String[] articles) {
 		super();
@@ -69,42 +76,51 @@ public class Person implements File_person {
 		this.articles = articles;
 	}	
 	
-	public Person readFile() throws IOException {
+	public void readFile() throws IOException {
 		
 		InputStream is= new FileInputStream("authors.txt");
 		InputStreamReader isr= new InputStreamReader(is);
 		BufferedReader br= new BufferedReader(isr);
 		
 		String s = br.readLine();
-		String name=s; //read name
-		
-		s=br.readLine(); //read year_birth and change String to int
+		int qtd_person=0;
 		int c=1;
-		int year_birth=0; 
-		for(int i=s.length()-1;i>=0;i--) {
-			year_birth+=((s.charAt(i)-'0')*c);
+		for(int i=(s.length()-1);i>=0;i--) {
+			qtd_person+=((s.charAt(i)-'0')*c);
 			c*=10;
 		}
 		
-		s=br.readLine(); //read institution
-		String institution=s;
 		
-		s=br.readLine(); //read qtd_articles
-		int qtd_articles=0;
-		c=1;
-		for(int i=s.length()-1;i>=0;i--) {
-			qtd_articles+=((s.charAt(i)-'0')*c);
-			c*=10;
+		for(int i=0;i<qtd_person;i++) {
+			br.readLine();
+			String name=s; //read name
+			
+			s=br.readLine(); //read year_birth and change String to int
+			c=1;
+			int year_birth=0; 
+			for(int i1=s.length()-1;i1>=0;i1--) {
+				year_birth+=((s.charAt(i1)-'0')*c);
+				c*=10;
+			}
+			
+			s=br.readLine(); //read institution
+			String institution=s;
+			
+			s=br.readLine(); //read qtd_articles
+			int qtd_articles=0;
+			c=1;
+			for(int i1=s.length()-1;i1>=0;i1--) {
+				qtd_articles+=((s.charAt(i1)-'0')*c);
+				c*=10;
+			}
+			
+			s=br.readLine(); //read articles
+			String[]articles=s.split(":");
+			
+			Person person=new Person (name,year_birth,institution,qtd_articles,articles);
+			authors.add(person);
 		}
-		
-		s=br.readLine(); //read articles
-		String[]articles=s.split(":");
-		
-		Person person=new Person (name,year_birth,institution,qtd_articles,articles);
 		br.close();
-		
-		return person;
-		
 	}
 
 	public void writeFile() throws IOException {
@@ -113,20 +129,22 @@ public class Person implements File_person {
 		OutputStreamWriter osw= new OutputStreamWriter(os);
 		BufferedWriter bw= new BufferedWriter(osw);
 		
-		bw.write(name);
-		bw.write(year_birth);
-		bw.write(institution);
-		bw.write(qtd_articles);
-			
-		String str="";
-		for(int i=0;i<qtd_articles;i++) {
-			str=str+articles[i];
-			if(i<qtd_articles-1) str=str+":";
+		int tam=authors.size();
+		bw.write(tam + "\n");
+		for(int i=0;i<tam;i++) {
+			Person aux = authors.get(i);
+			bw.write(aux.getName()+ "\n");
+			bw.write(aux.getYear_birth()+ "\n");
+			bw.write(aux.getInstitution()+ "\n");
+			bw.write(aux.getQtd_articles()+ "\n");			
+			String str="";
+			int qtd_art=aux.getQtd_articles();
+			for(int i1=0;i1<qtd_art;i1++) {
+				str=str+aux.articles[i1];
+				if(i1<qtd_articles-1) str=str+":";
+			}
+			bw.write(str+ "\n");
 		}
-		bw.write(str);
 		bw.close();		
 	}
-	
-	
-	
 }
