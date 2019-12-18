@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface File {
 	
-	public void readFile () throws IOException;
-	public void writeFile() throws IOException;
+	public int readFile () throws IOException;
+	public int writeFile() throws IOException;
 }

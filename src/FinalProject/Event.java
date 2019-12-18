@@ -91,7 +91,7 @@ public class Event implements File{
 		this.type = type;
 	}
 	
-	public void readFile()throws IOException{
+	public int readFile()throws IOException{
 		InputStream is= new FileInputStream("events.txt");
 		InputStreamReader isr= new InputStreamReader(is);
 		BufferedReader br= new BufferedReader(isr);
@@ -155,9 +155,10 @@ public class Event implements File{
 			events.add(aux);
 		}
 		br.close();
+		return 0;
 	}
 
-	public void writeFile() throws IOException {
+	public int writeFile() throws IOException {
 		OutputStream os= new FileOutputStream("events.txt");
 		OutputStreamWriter osw= new OutputStreamWriter(os);
 		BufferedWriter bw= new BufferedWriter(osw);
@@ -174,6 +175,7 @@ public class Event implements File{
 			bw.write(aux.getType()+"\n");
 		}
 		bw.close();
+		return 0;
 	}
 	
 	

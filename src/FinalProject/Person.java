@@ -46,7 +46,7 @@ public class Person implements File {
 		this.institution = institution;
 	}
 	
-	public void readFile() throws IOException {
+	public int readFile() throws IOException {
 		
 		InputStream is= new FileInputStream("authors.txt");
 		InputStreamReader isr= new InputStreamReader(is);
@@ -80,9 +80,10 @@ public class Person implements File {
 			authors.add(person);
 		}
 		br.close();
+		return 0;
 	}
 
-	public void writeFile() throws IOException {
+	public int writeFile() throws IOException {
 		
 		OutputStream os= new FileOutputStream("authors.txt");
 		OutputStreamWriter osw= new OutputStreamWriter(os);
@@ -96,6 +97,7 @@ public class Person implements File {
 			bw.write(aux.getYear_birth()+ "\n");
 			bw.write(aux.getInstitution()+ "\n");			
 		}
-		bw.close();		
+		bw.close();
+		return 0;
 	}
 }
